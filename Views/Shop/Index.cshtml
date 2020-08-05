@@ -1,0 +1,16 @@
+﻿@model ArtworkViewModel
+
+    <h5 class="text-center">Welcome to our web store!</h5>
+    
+    <p class="text-center">@Model.ArtworkCount prints in stock</p>
+
+        <div class="row">
+            
+                @foreach (var artwork in Model.AllArtwork)
+                { 
+                    <partial name="_ArtworkCard" model="artwork" />
+                }
+        </div>
+    
+   
+    

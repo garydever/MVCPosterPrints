@@ -1,0 +1,63 @@
+﻿@model ShoppingCartViewModel
+
+<h2>Your cart</h2>
+@if (Model.ShoppingCartTotal == 0)
+{
+    <h3>Your cart is empty</h3>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Selected amount</th>
+
+                <th>Print</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+                <th class="text-right">Remove item?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+            {
+                <tr>
+                    <td class="text-center">@line.Amount</td>
+                    <td class="text-left"><a asp-controller="Shop" asp-action="Detail" asp-route-id="@line.Artwork.ArtworkId">@line.Artwork.Name</a></td>
+                    <td class="text-right">@line.Artwork.Price.ToString("c")</td>
+                    <td class="text-right">
+                        @((line.Amount * line.Artwork.Price).ToString("c"))
+                    </td>
+                    <td class="text-center">
+                        <a asp-controller="ShoppingCart"
+                           asp-action="RemoveFromShoppingCart"
+                           asp-route-artworkId="@line.Artwork.ArtworkId">X</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @Model.ShoppingCartTotal.ToString("c")
+                </td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+}
+
+
+<div class="container d-inline-flex justify-content-between">
+    <div class="text-center">
+        <a class="btn btn-primary" asp-controller="Shop" asp-action="Index">Back to Shop</a>
+    </div>
+@if(Model.ShoppingCartTotal > 0)
+{
+    <div class="text-center">
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Check out</a>
+    </div>
+}   
+</div>

@@ -1,0 +1,13 @@
+﻿@model Artwork
+
+    <div class="container text-center">
+            <img src="@Model.ImageUrl" class="w-100"  />
+            <p class="lead">@Model.Name</p>
+            <p class="lead">@Model.Price.ToString("c")</p>
+            <a class="text-warning"
+               asp-controller="ShoppingCart"
+               asp-action="AddToShoppingCart"
+               asp-route-artworkId="@Model.ArtworkId">Order Print</a>
+            <hr />
+            <a asp-controller="Shop" asp-action="Index">Back to Shop</a>
+    </div>

@@ -1,0 +1,14 @@
+﻿@model Artwork
+
+    <div class="card col-sm-3 p-2 bg-light border-dark" id="artCard">
+
+        <a asp-controller="Shop" asp-action="Detail" asp-route-id=@Model.ArtworkId><img class="card-img-top" src=@Model.ThumbUrl></a>
+        <div class="card-body text-center">
+            <h5 class="card-title">@Model.Name</h5>
+            <div>@Model.Price.ToString("c")</div>
+            <a class="text-warning"
+               asp-controller="ShoppingCart"
+               asp-action="AddToShoppingCart"
+               asp-route-artworkId="@Model.ArtworkId">Order Print</a>
+        </div>
+    </div>
